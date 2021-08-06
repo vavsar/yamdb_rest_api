@@ -60,7 +60,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           stack_file_name: docker-compose.yaml
           script: |
-            sudo docker pull vavsar/yamdb_final:v1.00
+            sudo docker pull vavsar/yamdb_final
             sudo docker-compose stop
             sudo docker-compose rm web
             touch .env
