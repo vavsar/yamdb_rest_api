@@ -17,7 +17,7 @@ from .filters import TitleFilter
 
 from .models import Category, Genre, Title, Review
 from .permissions import (IsAdmin, IsAdminOrReadOnly,
-                          IsAuthorOrAdminOrModerator)
+                          IsAuthorOrAdminOrModerator, )
 from .serializers import (
     UserSerializer, EmailSerializer, CodeSerializer,
     CategorySerializer, GenreSerializer, TitleReadSerializer,
@@ -47,7 +47,7 @@ class UsersViewSet(viewsets.ModelViewSet):
 
     @action(detail=False,
             methods=['get', 'patch'],
-            permission_classes=(IsAuthenticated, ))
+            permission_classes=(IsAuthenticated,))
     def me(self, request):
         user = get_object_or_404(User, id=request.user.id)
         if request.method == 'GET':
