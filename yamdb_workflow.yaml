@@ -1,6 +1,7 @@
 name: yamdb_19_project
 
-on: [push]
+on:
+  push:
 
 jobs:
   tests:
@@ -24,6 +25,10 @@ jobs:
         python -m flake8
         python manage.py test
         pytest
+
+  pull-request:
+    branches:
+      - master
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
