@@ -1,7 +1,6 @@
 name: yamdb_19_project
 
-on:
-  push:
+on: [push]
 
 jobs:
   tests:
