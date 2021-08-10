@@ -54,22 +54,27 @@ scp ./<FILENAME> <USER>@<HOST>:/home/<USER>/yamdb_final/
 ```
 ssh <USER>@<HOST>
 ```
-2. Перейдите в запущенный контейнер приложения командой:
+2. Внутри контейнера необходимо выполнить миграции и собрать статику приложения:
 ```
-docker container exec -it <CONTAINER ID> bash
+docker exec -it <CONTAINER ID> python manage.py migrate
+docker exec -it <CONTAINER ID> python manage.py collectstatic
 ```
-3. Внутри контейнера необходимо выполнить миграции и собрать статику приложения:
+3. Для использования панели администратора по адресу http://0.0.0.0/admin/ необходимо создать суперпользователя.
 ```
-python manage.py collectstatic --no-input
-python manage.py migrate
+docker exec -it <CONTAINER ID> python manage.py createsuperuser
 ```
-4. Для использования панели администратора по адресу http://0.0.0.0/admin/ необходимо создать суперпользователя.
-```
-python manage.py createsuperuser.
-```
-5. К проекту по адресу http://0.0.0.0/redoc/ подключена документация API. В ней описаны шаблоны запросов к API и ответы. Для каждого запроса указаны уровни прав доступа - пользовательские роли, которым разрешён запрос.
+4. К проекту по адресу http://0.0.0.0/redoc/ подключена документация API. В ней описаны шаблоны запросов к API и ответы. Для каждого запроса указаны уровни прав доступа - пользовательские роли, которым разрешён запрос.
 
 ## Технологии используемые в проекте
 Python, Django, Django REST Framework, PostgreSQL, Nginx, Docker, GitHub Actions
+
+## Инструкция по заполнению .env
+Создайте файл .env и добавьте в него следующие переменные:  
+DB_ENGINE  
+DB_HOST  
+DB_NAME  
+DB_PORT  
+POSTGRES_USER  
+POSTGRES_PASSWORD  
 
 ![yamdb_workflow](https://github.com/vavsar/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
